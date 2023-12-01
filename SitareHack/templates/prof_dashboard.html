@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professor Dashboard</title>
+    <link rel="stylesheet" href="media-queries.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #cfbaf0;
+        }
+        h3{
+            margin-top: 0px;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header img {
+            max-height: 100px;
+        }
+        .dashboard-heading {
+            font-size: 1.5em;
+        }
+        .container {
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .card-sem {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            flex-basis: 48%;
+            margin-left: 100px;
+            margin-right: 100px;
+            margin-top: 50px;
+            transition: box-shadow 0.3s ease-in-out;
+            position: relative;
+        }
+
+        .card-sem:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.9);
+        }
+
+        .card-sem h2 {
+            color: #333;
+        }
+
+        .student-list {
+            margin-top: 10px;
+            display: none;
+        }
+
+        .student-list h3 {
+            color: #333;
+        }
+
+        .student-list p {
+            margin: 5px 0;
+        }
+
+        .show-button {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background-color: #333;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .show-button:hover {
+            background-color: #555;
+        }
+
+        .top-right-button {
+            /* position: fixed; */
+            top: 10px;
+            right: 10px;
+            background-color: #333;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .top-right-button:hover {
+            background-color: #555;
+        }
+        
+        .assignment-details {
+            margin-top: 15px;
+        }
+
+        .deadline-input {
+            margin-top: 10px;
+        }
+
+        .ia-details {
+            margin-top: 15px;
+        }
+        .upload-button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .upload-button:hover {
+            background-color: #45a049;
+        }
+
+        .edit-button {
+            background-color: #2196F3;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .edit-button:hover {
+            background-color: #0b7dda;
+        }
+        .btn-primary {
+            background-color: #0074d9;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 8px 16px;
+            cursor: pointer;
+            transition: background-color 0.1s;
+        }
+        .btn-primary:hover {
+            background-color: #3498db;
+        }
+        .btn-primary-announce{
+            background-color: #0074d9;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.1s;
+        }
+        .btn-primary-announce:hover {
+            background-color: #3498db;
+        }
+        .profile-card{
+            padding-left: 100px;
+            padding-right: 50px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .flashcard {
+            display: flex;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 80vw;
+            max-width: 600px;
+            background-color: white;
+        }
+        .flashcard img {
+            width: 120px; /* Adjust the width of the photo */
+            height: auto;
+        }
+        .flashcard-content {
+            padding: 16px;
+            flex: 1;
+        }
+        .flashcard:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.9);
+        }
+        .content {
+            padding: 50px;
+            justify-content: space-around;
+            display: flex;
+        }
+        .card {
+            width: 50%;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 16px;
+            transition: transform 0.3s;
+            position: relative;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.9);
+        }
+
+        .card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 16px;
+        }
+
+        .card-title {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .card-text {
+            color: #555;
+        }
+        .logo{
+            border-radius: 50%;
+        }
+        .flash-message {
+            list-style-type: none;
+            padding: 10px;
+            margin: 0;
+            text-align: left;
+        }
+
+        .flash-message li {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            position: fixed;
+        }
+
+        .error {
+            background-color: rgb(62, 63, 63);
+            color: #ff0000;
+        }
+
+        .success {
+            background-color: rgb(62, 63, 63);
+            color: #008000;
+        }
+        button {
+            background-color: #6d6875;
+            color: white;
+            padding: 3px 8px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover{
+            background-color: #005f8d;
+        }
+        .announcement-flashcard {
+            color: black;
+            display: none;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 450px;
+            margin-top: 70px;
+            margin-right: 185px;
+            padding: 10px;
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            height: 500px;
+            overflow: auto;
+        }
+        .announcement-flashcard h2 {
+            margin-top: 0;
+        }
+        .head-buttons{
+            justify-content: flex-end;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img class="logo" src="/static/img/sulogo.jpeg.jpg" alt="Sitare University logo">
+        <h1 class="dashboard-heading">Professor Dashboard</h1>
+        <div class="head-buttons">
+            <button class="top-right-button" onclick="showFlashcard()">Schedule</button>
+            <button class="top-right-button" onclick="logout()">Logout</button>
+        </div>
+    </header>
+    <!-- Flashcard to display announcements -->
+    <div class="announcement-flashcard" id="announcementsCard">
+        <h2>Your Schedule</h2>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Course Name</th>
+                    <th>Day</th>
+                    <th>Time</th>
+                    <th>Type</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in schedule %}
+                <tr>
+                    <td>{{ item.course }}</td>
+                    <td>{{ item.day }}</td>
+                    <td>{{ item.time }}</td>
+                    <td>{{ item.type }}</td>
+                    <td>
+                        <a href="{{ url_for('delete_schedule', id=item.id) }}">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table><br>
+        <div display="flex">
+            <button onclick="Expandflashcard()">Add</button>
+            <button onclick="hideFlashcard()">Close</button>
+        </div>
+    </div>
+    <div class="announcement-flashcard" id="expandcard">
+        <h2>Your Schedule</h2>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Course Name</th>
+                    <th>Day</th>
+                    <th>Time</th>
+                    <th>Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in schedule %}
+                <tr>
+                    <td>{{ item.course }}</td>
+                    <td>{{ item.day }}</td>
+                    <td>{{ item.time }}</td>
+                    <td>{{ item.type }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table><br><br>
+        <div>
+            <form action="/schedule" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="name" value="{{ name }}">
+                <label for="course">Course:*</label>
+                <select name="course" id="courseSelect" required>
+                {% for k,v in course.items() %}
+                    {% for item in v %}
+                    <option value="{{item}}">{{item}}</option>
+                    {% endfor %}
+                {% endfor %}
+                </select><br><br>
+                <label for="Day">Day:*</label>
+                    <select name="day" id="dayselect" required>
+                        <option value="Monday">Monday</option>
+                        <option value="Tuesday">Tuesday</option>
+                        <option value="Wednesday">Wednesday</option>
+                        <option value="Thursday">Thursday</option>
+                        <option value="Friday">Friday</option>
+                        <option value="Saturday">Saturday</option>
+                        <option value="Sunday">Sunday</option>
+                    </select><br><br>
+                <label for="time">Time:*</label>
+                <input type="text" id="time" name="time" required><pre>format (00:00AM to 00:00PM)</pre>
+                <label for="type">Type:*</label>
+                    <select name="type" id="typeselect" required>
+                        <option value="Theory">Theory</option>
+                        <option value="Tutorial">Tutorial</option>
+                        <option value="Practical">Practical</option>
+                        <option value="Office hours">Office hours</option>
+                    </select><br><br>
+                <input type="submit" value="Submit" class="btn-primary">
+            </form><br>
+        </div>
+        <button onclick="hideFlashcard()">Close</button>      
+    </div>
+    <section>
+        <!-- for flash message -->
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="flash-message">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <center><h2>Welcome {{name}}!!</h2></center>
+        <div class="profile-card">
+            <div class="flashcard">
+                <img src="/static/img/{{img}}" alt="Student Photo">
+                <div class="flashcard-content">
+                    <p>Name: {{name}}</p>
+                    Courses: 
+                    <ul>
+                        {% for k,v in course.items() %}
+                            {% for item in v %}
+                            <li>{{item}} to Semester {{k}}</li><br>
+                            {% endfor %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="flashcard">
+                <div class="flashcard-content">
+                    <center><h3>Announce</h3></center>
+                    <form action="/professor/announcement" method="POST">
+                        <label for="semester">Semester:</label>
+                        <input type="text" id="semester" name="semester" required><br><br>
+                        <label for="message">Message:</label><br>
+                        <textarea id="message" name="message" rows="2" cols="60" required></textarea><br><br>
+                        <input type="submit" value="Announce" class="btn-primary-announce">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <div class="container">
+        {% for k,v in course.items() %}
+            {% for item in v %}
+            <div class="card-sem">
+                <h2 class="card-title">Semester {{k}}: {{item}}</h2>
+                <!-- <div class="assignment-details">
+                    <p><strong>Assignment 1:</strong> Deadline <input type="date" class="deadline-input"> </p>
+                    <p><strong>Assignment 2:</strong> Deadline <input type="date" class="deadline-input"> </p>
+                    <p><strong>Assignment 3:</strong> Deadline <input type="date" class="deadline-input"> </p>
+                </div> -->
+                <form class="ia-details" action="/upload" method="post" enctype="multipart/form-data">
+                    <p><strong>Course outline </strong> (*.docx, .pdf)<br>
+                        <input type="file" id="outline" name="file" accept=".pdf, .docx" class="upload-button">
+                        <input type="hidden" name="semester" value="{{ k }}">
+                        <input type="hidden" name="course" value="{{ item }}">
+                        <input type="hidden" name="test" value="outline">
+                        <input type="submit" value="Upload" class="btn-primary">
+                    </p>
+                </form>
+                <form class="ia-details" action="/upload" method="post" enctype="multipart/form-data">
+                    <p><strong>IA1 </strong> (*.xlsx)<br>
+                        <input type="file" id="ia1" name="file" accept=".xlsx" class="upload-button">
+                        <input type="hidden" name="semester" value="{{ k }}">
+                        <input type="hidden" name="course" value="{{ item }}">
+                        <input type="hidden" name="test" value="ia1">
+                        <input type="submit" value="Upload" class="btn-primary">
+                    </p>
+                </form>
+                <form class="ia-details" action="/upload" method="post" enctype="multipart/form-data">
+                    <p><strong>IA2 </strong> (*.xlsx)<br>
+                        <input type="file" id="ia2" name="file" accept=".xlsx" class="upload-button">
+                        <input type="hidden" name="semester" value="{{ k }}">
+                        <input type="hidden" name="course" value="{{ item }}">
+                        <input type="hidden" name="test" value="ia2">
+                        <input type="submit" value="Upload" class="btn-primary">
+                    </p>
+                </form>
+                <form class="ia-details" action="/upload" method="post" enctype="multipart/form-data">
+                    <p><strong>IA3 </strong> (*.xlsx)<br>
+                        <input type="file" id="ia3" name="file" accept=".xlsx" class="upload-button">
+                        <input type="hidden" name="semester" value="{{ k }}">
+                        <input type="hidden" name="course" value="{{ item }}">
+                        <input type="hidden" name="test" value="ia3">
+                        <input type="submit" value="Upload" class="btn-primary">
+                    </p>
+                </form>
+                <form class="ia-details" action="/upload" method="post" enctype="multipart/form-data">
+                    <p><strong>Final </strong> (*.xlsx)<br>
+                        <input type="file" id="final" name="file" accept=".xlsx" class="upload-button">
+                        <input type="hidden" name="semester" value="{{ k }}">
+                        <input type="hidden" name="course" value="{{ item }}">
+                        <input type="hidden" name="test" value="final">
+                        <input type="submit" value="Upload" class="btn-primary">
+                    </p>
+                </form>
+                <p>* file format</p>
+                <h3>Uploaded files:</h3>
+                {% for sem, files in files[k].items() %}
+                    {% for file in files %}
+                        <li>{{file.filename}}</li>
+                    {% endfor %}
+                {% endfor %}
+                <div class="student-list">
+                    <h3>Students:</h3>
+                    <ol>
+                        {% for student in student_lst[k] %}
+                            <li>{{student.roll_no}} - {{student.s_name}}</li>
+                        {% endfor %}
+                    </ol>
+                </div>
+            <button class="show-button" onclick="toggleStudentList(this)">Show</button>
+        </div>
+        {% endfor %}
+    {% endfor %}       
+    </div>
+    <br>
+    <footer class="footer">
+        <center>
+            <p>&copy; 2023 Professor Dashboard</p>
+        </center>
+    </footer>
+    <script>
+        function toggleStudentList(button) {
+            var card = button.parentNode;
+            var studentList = card.querySelector('.student-list');
+            var buttonText = button.innerText.toLowerCase();
+            
+            if (buttonText === 'show') {
+                studentList.style.display = 'block';
+                button.innerText = 'Hide';
+            } else {
+                studentList.style.display = 'none';
+                button.innerText = 'Show';
+            }
+        }
+        function logout() {
+            alert('Logging out...');
+            window.location.href = '/login';
+        }
+        setTimeout(function() {
+        document.querySelector('.flash-message').style.display = 'none';
+        }, 3000);
+        function showFlashcard() {
+            document.getElementById("announcementsCard").style.display = "block";
+        }
+        function hideFlashcard() {
+            document.getElementById("announcementsCard").style.display = "none";
+        }
+        function hideFlashcard() {
+            document.getElementById("expandcard").style.display = "none";
+            document.getElementById("announcementsCard").style.display = "none";
+        }
+        function Expandflashcard() {
+            document.getElementById("expandcard").style.display = "block";
+        }
+    </script>
+    
+</body>
+</html>
+
