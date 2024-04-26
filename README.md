@@ -5,6 +5,7 @@ Theme: Academic management portal
 
 In this project, we have created a academic portal where professors can upload course outline, marks of the students and can make announcements to students. We have four html pages including Register page, login page, Professor dashboard and student dashboard. Student dashboard includes student profile card, internal tests marks displayed course wise, overall report of the student performance and uploading scanned answer sheets of the students to the university portal.
 
+
 ## Prerequisite Installations
 - Flask
 - flask_login
